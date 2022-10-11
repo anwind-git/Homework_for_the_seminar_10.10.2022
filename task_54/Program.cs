@@ -4,25 +4,28 @@
 void Zadacha54()
 {
     Random random = new Random();
-    int rows = 5;
-    int colums = 5;
+    int rows = random.Next(4, 9);
+    int colums = random.Next(4, 9);
 
     Console.WriteLine($"Массив размера {rows}x{colums}");
     int[,] number = new int[rows, colums];
-    int[,] sorting_number = new int[rows, colums];
+    int[,] sorting_number = new int[number.GetLength(0), number.GetLength(1)];
 
-    FillArray(number, sorting_number, rows, colums);
-    Sorting(sorting_number, rows, colums);
-    PrintArray(number, rows, colums);
-    SortingPrintArray(sorting_number, rows, colums);
+    FillArray(number, sorting_number);
+    Sorting(number, sorting_number);
+    PrintArray(number);
+    SortingPrintArray(number, sorting_number);
 }
 
-void FillArray(int[,] number, int[,] sorting_number, int rows, int colums)
+void FillArray(int[,] number, int[,] sorting_number)
 {
     Random random = new Random();
+    int rows = number.GetLength(0);
+    int colums = number.GetLength(1);
+    
     for(int i = 0; i < rows; i++)
     {
-        for(int j = 0; j < rows; j++)
+        for(int j = 0; j < colums; j++)
         {
             number[i, j] = random.Next(-9, 10);
             sorting_number[i, j] = number[i, j];
@@ -30,9 +33,11 @@ void FillArray(int[,] number, int[,] sorting_number, int rows, int colums)
     }
 
 }
-void Sorting(int[,] sorting_number, 
-             int rows, int colums)
+
+void Sorting(int[,] number, int[,] sorting_number)
 {
+    int rows = number.GetLength(0);
+    int colums = number.GetLength(1);
     for(int i = 0; i < rows; i++)
     {
         for(int j = 0; j < colums; j++)
@@ -49,27 +54,34 @@ void Sorting(int[,] sorting_number,
         }
     }
 }
-void PrintArray(int[,] number, int rows, int colums)
+
+void PrintArray(int[,] number)
 {
     Console.WriteLine();
     Console.WriteLine("Исходный массив: ");
+    int rows = number.GetLength(0);
+    int colums = number.GetLength(1);
+
     for(int i = 0; i < rows; i++)
     {
-        for(int j = 0; j < rows; j++)
+        for(int j = 0; j < colums; j++)
         {
-            Console.Write($"{number[i, j]}\t");
+            Console.Write(number[i, j] + "\t");
         }
         Console.WriteLine();
     }
     Console.WriteLine();
 }
 
-void SortingPrintArray(int[,] sorting_number, int rows, int colums)
+void SortingPrintArray(int[,] number, int[,] sorting_number)
 {
     Console.WriteLine("Сортировка исходного массива: ");
+    int rows = number.GetLength(0);
+    int colums = number.GetLength(1);
+
     for(int i = 0; i < rows; i++)
     {
-        for(int j = 0; j < rows; j++)
+        for(int j = 0; j < colums; j++)
         {
             Console.Write($"{sorting_number[i, j]}\t");
         }
