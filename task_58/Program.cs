@@ -50,8 +50,6 @@ void FillArray(int[,] number)
 
 void PrintArray(int[,] number)
 {
-    Console.WriteLine();
-    Console.WriteLine("Исходный массив: ");
     int rows = number.GetLength(0);
     int colums = number.GetLength(1);
 
