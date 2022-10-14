@@ -2,8 +2,9 @@
 
 void Zadacha58()
 {
-    int rows = 4;
-    int colums = 4;
+    Random random = new Random();
+    int rows = random.Next(3, 9);
+    int colums = random.Next(3, 9);
 
     Console.WriteLine($"Массив размера {rows}x{colums}");
     int[,] number = new int[rows, colums];
@@ -16,35 +17,33 @@ void FillArray(int[,] number)
 {
     int rows = number.GetLength(0);
     int colums = number.GetLength(1);
-    int num = rows * colums;
-    for(int i = 0; i < num; i++)
+    int index = 0;
+    int currentRow = 0;
+    int currentColumn = 0;
+
+    int chengIndexRow = 0;
+    int chengIndexColumn = 1;
+
+    int steps = colums;
+    int turn = 0;
+    
+    while(index < number.Length)
     {
-        if(i < 4)
-            number[0, i] = i + 1;
-        if(i > 3 && i < 5)
-            number[1, 3] = i + 1;
-        if(i > 4 && i < 6)
-            number[2, 3] = i + 1;
-        if(i > 5 && i < 7)
-            number[3, 3] = i + 1;
-        if(i > 6 && i < 8)
-            number[3, 2] = i + 1;
-        if(i > 7 && i < 9)
-            number[3, 1] = i + 1;
-        if(i > 8 && i < 10)
-            number[3, 0] = i + 1;
-        if(i > 9 && i < 11)
-            number[2, 0] = i + 1;
-        if(i > 10 && i < 12)
-            number[1, 0] = i + 1;
-        if(i > 11 && i < 13)
-            number[1, 1] = i + 1;
-        if(i > 12 && i < 14)
-            number[1, 2] = i + 1;
-        if(i > 13 && i < 15)
-            number[2, 2] = i + 1;
-        if(i > 14 && i < 16)
-            number[2, 1] = i + 1;
+        number[currentRow, currentColumn] = index + 1;
+        index++;
+        steps--;
+        if(steps == 0)
+        {
+            steps = rows * ((turn+1)%2) + colums * (turn%2)- 1 - turn/2;
+            int temp = chengIndexRow;
+            chengIndexRow = chengIndexColumn;
+            chengIndexColumn = - temp;
+            turn++;
+
+        }
+        currentRow += chengIndexRow;
+        currentColumn += chengIndexColumn;
+
     }
 }
 
